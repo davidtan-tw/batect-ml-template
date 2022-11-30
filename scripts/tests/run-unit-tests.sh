@@ -2,4 +2,4 @@
 
 set -e
 
-python -m unittest discover ./tests
+pytest ./tests
