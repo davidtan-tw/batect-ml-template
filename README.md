@@ -2,41 +2,42 @@
 
 A template for ML projects, with dependency management made effortless by `batect`
 
-## Prerequisites
-
-- [Docker](https://docs.docker.com/desktop/)
-- Java 8 or newer (used by batect. you'll not be seeing Java code - I promise)
-- On Linux and macOS: `bash` and `curl`
-- On Windows: Windows 10 / Windows Server 2016 or later
-
 ## Setup
 
-Install the dependencies needed by `batect` and your IDE on your host machine
+Install host-level dependencies:
 
 ```shell script
 # mac users
-bin/non_batect/go.sh
+scripts/go/go-mac.sh
 
-# windows / linux
-# work in progress. in the meantime, please install Docker and Java manually if it's not already installed
+# linux users
+scripts/go-linux-ubuntu.sh
+
+# windows
+# work in progress. in the meantime, please install Docker manually if it's not already installed
 ```
 
-Configure your IDE to use the python virtual environment (`./.venv/`) created by `go.sh` 
-- [PyCharm instructions](https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html#existing-environment)
-- [VS Code instructions](https://code.visualstudio.com/docs/python/environments)
+Configure Docker runtime
+```shell
+# set up colima (a license-free docker runtime, an alternative to docker desktop)
+https://gist.github.com/jcartledge/0ce114e9719a62a4776569e80088511d
+```
 
 ## Tasks that you can run
 
 ```shell script
-# run unit tests
-./batect unit_test
+# start docker runtime
+colima start
 
-# train ML model
-./batect train_model
-```
+# install application-level dependencies
+./batect setup
 
-## Other things you can do 
-```shell script
-# start jupyter server (if you need it for your workflow)
-./batect start_jupyter
+# start container (i.e. local dev environment)
+./batect start-dev-container
+
+# run tests
+**./batect --output=all run-unit-tests**
+
+# start jupyter notebook. --output=all shows verbose logs of docker tasks (e.g. docker build)
+./batect --output=all start-jupyter
 ```

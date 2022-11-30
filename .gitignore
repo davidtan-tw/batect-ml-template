@@ -2,7 +2,8 @@
 .idea
 .vscode
 
-# python virtual environment (used by IDE)
+# python virtual environments
+venv
 .venv
 
 # python cache
