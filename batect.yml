@@ -5,8 +5,11 @@ containers:
       - local: .
         container: /code
       - type: cache
-        name: venv
-        container: /usr/local/lib/python3.10/site-packages/ # pip packages + spacy en_core_web_lg
+        name: virtual-environment
+        container: /code/.venv
+      - type: cache
+        name: pypoetry-cache
+        container: /root/.cache/pypoetry
 
 tasks:
   setup:

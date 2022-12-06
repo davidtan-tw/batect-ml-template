@@ -29,15 +29,15 @@ https://gist.github.com/jcartledge/0ce114e9719a62a4776569e80088511d
 # start docker runtime
 colima start
 
-# install application-level dependencies
-./batect setup
+# install application-level dependencies. run this task after adding any new dependencies. --output=all shows verbose logs of docker tasks (e.g. docker build)
+./batect --output=all setup
 
 # start container (i.e. local dev environment)
 ./batect start-dev-container
 
 # run tests
-**./batect --output=all run-unit-tests**
+./batect --output=all run-unit-tests
 
-# start jupyter notebook. --output=all shows verbose logs of docker tasks (e.g. docker build)
-./batect --output=all start-jupyter
+# start jupyter notebook.
+./batect -o all start-jupyter
 ```
