@@ -16,3 +16,6 @@ which lefthook || brew install lefthook
 
 echo "Installing git hooks"
 lefthook install
+
+echo "Installing dependencies on host (so that we can configure a virtual environment for our IDE)"
+./scripts/go/install-dependencies-on-host.sh

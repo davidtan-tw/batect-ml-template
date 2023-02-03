@@ -5,11 +5,11 @@ containers:
       - local: .
         container: /code
       - type: cache
-        name: virtual-environment
-        container: /code/.venv
-      - type: cache
-        name: pypoetry-cache
-        container: /root/.cache/pypoetry
+        name: python-dev-dependencies
+        container: /opt/.venv  # this path has to be same as VENV_PATH below
+    build_args:
+      VENV_PATH: /opt/.venv
+    build_target: dev
 
 tasks:
   setup:
@@ -25,7 +25,7 @@ tasks:
       command: bash
 
   start-jupyter:
-    description: Start Jupyter Notebook
+    description: Start Jupyter Notebook server
     run:
       container: dev
       command: scripts/start-jupyter.sh

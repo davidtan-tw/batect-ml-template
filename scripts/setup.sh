@@ -2,7 +2,7 @@
 
 set -e
 
-poetry install --no-root
-
-# download spacy language model if it's not already downloaded.
-[ -f /usr/local/lib/python3.10/site-packages/en_core_web_lg/__init__.py ] || python -m spacy download en_core_web_lg
+echo "Installing dependencies in virtual environment: $VENV_PATH"
+python3 -m venv $VENV_PATH
+. $VENV_PATH/bin/activate
+poetry install

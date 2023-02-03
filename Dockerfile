@@ -1,4 +1,5 @@
-FROM python:3.10.6-slim
+#################### first stage: dev ####################
+FROM python:3.11.1-slim AS dev
 
 WORKDIR /code
 
@@ -7,9 +8,10 @@ RUN apt-get update && apt-get -y install gcc
 RUN pip install poetry
 ADD pyproject.toml /code/
 RUN poetry config installer.max-workers 10
+RUN poetry config virtualenvs.create false
 
-ENV VENV_PATH="/code/.venv" \
-    POETRY_VIRTUALENVS_IN_PROJECT=true
+ARG VENV_PATH
+ENV VENV_PATH=$VENV_PATH
 ENV PATH="$VENV_PATH/bin:$PATH"
 
 CMD ["bash"]
